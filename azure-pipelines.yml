@@ -7,7 +7,7 @@ pool:
 
 variables:
   buildConfiguration: 'production'
-  outputPath: 'dist/employee_management/browser' #build folder
+  outputPath: 'dist/employee_management' #build folder
 
 
 steps:
