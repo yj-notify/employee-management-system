@@ -1,0 +1,40 @@
+
+<div class="p-4 max-w-4xl mx-auto">
+  <h1 class="text-2xl font-bold mb-4">Employee Management</h1>
+
+  <form (ngSubmit)="save()" class="mb-6 grid grid-cols-5 gap-4">
+    <input type="text" [(ngModel)]="formModel.name" name="name" placeholder="Name" class="border p-2 rounded" required>
+    <input type="number" [(ngModel)]="formModel.age" name="age" placeholder="Age" class="border p-2 rounded" required>
+    <input type="email" [(ngModel)]="formModel.email" name="email" placeholder="Email" class="border p-2 rounded" required>
+    <input type="text" [(ngModel)]="formModel.department" name="department" placeholder="Department" class="border p-2 rounded" required>
+    <button type="submit" class="bg-blue-500 text-white p-2 rounded">
+      {{ editing ? 'Update' : 'Add' }}
+    </button>
+  </form>
+
+  <table class="w-full border-collapse">
+    <thead>
+      <tr>
+        <th class="border p-2">ID</th>
+        <th class="border p-2">Name</th>
+        <th class="border p-2">Age</th>
+        <th class="border p-2">Email</th>
+        <th class="border p-2">Department</th>
+        <th class="border p-2">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let emp of employees">
+        <td class="border p-2">{{ emp.id }}</td>
+        <td class="border p-2">{{ emp.name }}</td>
+        <td class="border p-2">{{ emp.age }}</td>
+        <td class="border p-2">{{ emp.email }}</td>
+        <td class="border p-2">{{ emp.department }}</td>
+        <td class="border p-2 space-x-2">
+          <button (click)="edit(emp)" class="text-blue-500">Edit</button>
+          <button (click)="remove(emp.id)" class="text-red-500">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

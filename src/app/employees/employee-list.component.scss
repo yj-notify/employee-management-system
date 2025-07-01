@@ -1,0 +1,25 @@
+/* Add your Tailwind classes, custom styles, or component-specific tweaks here */
+
+table {
+  @apply w-full border-collapse;
+
+  th, td {
+    @apply border p-2;
+  }
+
+  th {
+    @apply bg-gray-100 text-left;
+  }
+
+  td {
+    @apply align-middle;
+  }
+}
+
+form input {
+  @apply border p-2 rounded w-full;
+}
+
+form button {
+  @apply bg-blue-600 text-white rounded p-2 hover:bg-blue-700 transition;
+}

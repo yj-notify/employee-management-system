@@ -1,0 +1,44 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  buildConfiguration: 'production'
+  outputPath: 'dist/employee_management'  # 🔧 your actual build folder
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '18.x'
+  displayName: 'Install Node.js'
+
+- script: |
+    npm install -g @angular/cli
+    npm install
+    ng build --configuration ${{ variables.buildConfiguration }}
+  displayName: 'Install and Build Angular App'
+
+- task: CopyFiles@2
+  inputs:
+    contents: '$(outputPath)/**'
+    targetFolder: '$(Build.ArtifactStagingDirectory)'
+  displayName: 'Copy Build Output'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'angular-app'
+    publishLocation: 'Container'
+  displayName: 'Publish Artifacts'
+
+- task: AzureWebApp@1
+  inputs:
+    azureSubscription: 'azure-service-employee-api'  # Replace with your Azure service connection
+    appType: 'webAppLinux'
+    appName: 'employee-management-system'  # Replace with your Angular App Service name
+    package: '$(Build.ArtifactStagingDirectory)'
+    runtimeStack: 'NODE|18-lts'
+    startUpCommand: ''
+  displayName: 'Deploy to Azure App Service'
