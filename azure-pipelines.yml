@@ -7,7 +7,8 @@ pool:
 
 variables:
   buildConfiguration: 'production'
-  outputPath: 'dist/employee_management'  # 🔧 your actual build folder
+  outputPath: 'dist/employee_management/browser' #build folder
+
 
 steps:
 - task: NodeTool@0
@@ -41,5 +42,5 @@ steps:
     appName: 'employee-management-system'  # Angular App Service name
     package: '$(Build.ArtifactStagingDirectory)'
     runtimeStack: 'NODE|18-lts'
-    startUpCommand: ''
+    startUpCommand: 'npx serve -s .'  # serve static files
   displayName: 'Deploy to Azure App Service'
