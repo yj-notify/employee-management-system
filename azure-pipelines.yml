@@ -36,9 +36,9 @@ steps:
 
 - task: AzureWebApp@1
   inputs:
-    azureSubscription: 'azure-service-employee-api'  # Replace with your Azure service connection
+    azureSubscription: 'azure-service-employee-ui'  # Azure service connection
     appType: 'webAppLinux'
-    appName: 'employee-management-system'  # Replace with your Angular App Service name
+    appName: 'employee-management-system'  # Angular App Service name
     package: '$(Build.ArtifactStagingDirectory)'
     runtimeStack: 'NODE|18-lts'
     startUpCommand: ''
